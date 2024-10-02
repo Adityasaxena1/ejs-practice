@@ -1,0 +1,23 @@
+import bodyParser from "body-parser";
+import express from "express";
+
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.render("index.ejs");
+});
+
+app.post("/submit", (req, res) => {
+  console.log(req.body);
+  res.render("index.ejs", {
+    fName: req.body.fName,
+    lName: req.body.lName,
+  });
+});
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
